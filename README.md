@@ -123,52 +123,6 @@ The system uses a **two-stage analysis pipeline**:
 
 ---
 
-## 📡 API Reference
-
-### `POST /api/analyze-career`
-
-**Request** (multipart/form-data):
-
-| Field | Type | Description |
-|---|---|---|
-| `resume` | File | PDF resume (max 5MB) |
-| `job_description` | String | Full job description text |
-
-**Response:**
-```json
-{
-  "match_score": 78,
-  "matched_skills": ["python", "docker", "fastapi"],
-  "missing_skills": ["kubernetes", "redis"],
-  "recommended_roles": ["Backend Developer", "Full Stack Developer"],
-  "roadmap": [
-    {
-      "week": 1,
-      "focus": "Kubernetes Basics",
-      "tasks": ["Learn pods", "Learn services"],
-      "resources": ["kubernetes.io/docs"],
-      "difficulty": "Beginner"
-    }
-  ],
-  "project_suggestions": [...],
-  "resume_improvements": [...],
-  "interview_questions": {
-    "technical": [...],
-    "hr": [...],
-    "system_design": [...]
-  },
-  "ats_tips": [...],
-  "overall_feedback": "Strong profile with excellent Python skills..."
-}
-```
-
-### `GET /api/health`
-```json
-{ "status": "ok", "message": "Career Copilot API is running 🚀" }
-```
-
----
-
 ## 🧪 Tests
 
 ```bash
