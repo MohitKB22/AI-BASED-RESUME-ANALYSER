@@ -1,4 +1,4 @@
-# 🤖 AI-Based Resume Analyser
+ 🤖 AI-Based Resume Analyser
 
 <div align="center">
 
@@ -8,9 +8,11 @@
 ![scikit-learn](https://img.shields.io/badge/scikit--learn-ML-F7931E?style=for-the-badge&logo=scikit-learn&logoColor=white)
 ![License](https://img.shields.io/badge/License-AGPL_3.0-blue?style=for-the-badge)
 
-**An AI-powered resume analysis system that helps job seekers get hired faster and helps recruiters screen smarter.**
+### An AI-powered resume analysis system that helps job seekers get hired faster and recruiters screen smarter.
 
-[API Docs](http://localhost:8000/docs) · [Report Bug](https://github.com/MohitKB22/AI-BASED-RESUME-ANALYSER/issues) · [Request Feature](https://github.com/MohitKB22/AI-BASED-RESUME-ANALYSER/issues)
+> Built with **FastAPI + Groq Llama 3.3 70B + scikit-learn ML** — fully free, no paid APIs required.
+
+The project automates resume screening by combining a trained **TF-IDF + Logistic Regression ML model** for instant skill matching with **Groq's Llama 3.3 70B LLM** for deep analysis. It extracts skills from your resume, compares them against a job description, predicts suitable roles, generates a personalized 4-week learning roadmap, suggests real-world projects to build, rewrites weak resume bullet points for ATS compatibility, and produces tailored interview questions — all in under 30 seconds.
 
 </div>
 
@@ -39,7 +41,7 @@
 | **ML** | scikit-learn · TF-IDF + Logistic Regression | Role prediction, match scoring |
 | **Backend** | FastAPI · Python 3.11+ | REST API, PDF processing |
 | **PDF Parsing** | pdfplumber | Resume text extraction |
-| **Frontend** | Vanilla HTML/CSS/JS | Standalone dashboard UI |
+| **Frontend** | Vanilla HTML/CSS/JS | Standalone dashboard UI — no Node.js needed |
 | **Testing** | pytest · 33 tests | Unit, integration, E2E |
 
 ---
@@ -154,6 +156,7 @@ python3 -m pytest tests/test_all.py -v
 1. Update `const API = 'https://your-backend.onrender.com'` in `index.html`
 2. Drag `frontend/index.html` to Netlify Drop
 3. Done — live URL instantly
+
 ---
 
 ## 📄 License
@@ -165,3 +168,4 @@ Distributed under the AGPL-3.0 License. See [`LICENSE`](LICENSE) for more inform
 <div align="center">
   <p>If this project helped you, please give it a ⭐ on GitHub!</p>
 </div>
+
