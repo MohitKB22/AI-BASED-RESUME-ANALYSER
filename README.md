@@ -2,14 +2,6 @@
 
 <div align="center">
 
-![Python](https://img.shields.io/badge/Python-3.11+-3776AB?style=for-the-badge&logo=python&logoColor=white)
-![FastAPI](https://img.shields.io/badge/FastAPI-0.111-009688?style=for-the-badge&logo=fastapi&logoColor=white)
-![Groq](https://img.shields.io/badge/Groq-Llama_3.3_70B-F55036?style=for-the-badge&logo=groq&logoColor=white)
-![scikit-learn](https://img.shields.io/badge/scikit--learn-ML-F7931E?style=for-the-badge&logo=scikit-learn&logoColor=white)
-![License](https://img.shields.io/badge/License-AGPL_3.0-blue?style=for-the-badge)
-
-### An AI-powered resume analysis system that helps job seekers get hired faster and recruiters screen smarter.
-
 > Built with **FastAPI + Groq Llama 3.3 70B + scikit-learn ML** — fully free, no paid APIs required.
 
 The project automates resume screening by combining a trained **TF-IDF + Logistic Regression ML model** for instant skill matching with **Groq's Llama 3.3 70B LLM** for deep analysis. It extracts skills from your resume, compares them against a job description, predicts suitable roles, generates a personalized 4-week learning roadmap, suggests real-world projects to build, rewrites weak resume bullet points for ATS compatibility, and produces tailored interview questions — all in under 30 seconds.
