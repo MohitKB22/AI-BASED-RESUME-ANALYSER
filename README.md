@@ -1,77 +1,273 @@
-# PaperMind – Multi-Agent RAG System
+# 🤖 AI-Based Resume Analyser
 
-## Quick Start
+<div align="center">
 
-### 1. Create your `.env` file
-```bash
-cp .env.example .env
-# Edit .env and set your OPENAI_API_KEY
+![Python](https://img.shields.io/badge/Python-3.11+-3776AB?style=for-the-badge&logo=python&logoColor=white)
+![FastAPI](https://img.shields.io/badge/FastAPI-0.111-009688?style=for-the-badge&logo=fastapi&logoColor=white)
+![Groq](https://img.shields.io/badge/Groq-Llama_3.3_70B-F55036?style=for-the-badge&logo=groq&logoColor=white)
+![scikit-learn](https://img.shields.io/badge/scikit--learn-ML-F7931E?style=for-the-badge&logo=scikit-learn&logoColor=white)
+![License](https://img.shields.io/badge/License-AGPL_3.0-blue?style=for-the-badge)
+
+**An AI-powered resume analysis system that helps job seekers get hired faster and helps recruiters screen smarter.**
+
+[API Docs](http://localhost:8000/docs) · [Report Bug](https://github.com/MohitKB22/AI-BASED-RESUME-ANALYSER/issues) · [Request Feature](https://github.com/MohitKB22/AI-BASED-RESUME-ANALYSER/issues)
+
+</div>
+
+---
+
+## 📸 What It Does
+
+> Upload resume → Paste job description → Get full AI-powered career dashboard
+
+| Feature | Description |
+|---|---|
+| 🎯 Match Score | AI-computed % match between your resume and the job description |
+| 🧩 Skill Gap | Matched vs missing skills highlighted instantly |
+| 📅 4-Week Roadmap | Personalized learning plan to close skill gaps |
+| 🚀 Project Ideas | Real-world projects to strengthen your portfolio |
+| ✍️ Resume Rewrites | Before/after bullet improvements with ATS optimization |
+| 🎤 Interview Prep | Technical, HR, and System Design questions with hints |
+
+---
+
+## 🏗️ Architecture
+
+```
+AI-BASED-RESUME-ANALYSER/
+├── backend/
+│   ├── main.py                   # FastAPI application entry point
+│   ├── train_model.py            # ML model training script
+│   ├── requirements.txt          # Python dependencies
+│   ├── .env                      # API keys (not committed)
+│   ├── models/                   # Trained ML model artifacts
+│   │   ├── role_classifier.pkl   # TF-IDF + Logistic Regression
+│   │   ├── label_encoder.pkl     # Role label encoder
+│   │   └── tfidf_vectorizer.pkl  # TF-IDF vectorizer for scoring
+│   ├── routes/
+│   │   └── career.py             # POST /api/analyze-career endpoint
+│   ├── services/
+│   │   ├── resume_parser.py      # PDF text extraction (pdfplumber)
+│   │   ├── ml_matcher.py         # ML skill matching + role prediction
+│   │   └── llm_analyzer.py       # Groq Llama 3.3 70B deep analysis
+│   └── tests/
+│       └── test_all.py           # 33 automated tests
+│
+└── frontend/
+    └── index.html                # Standalone dashboard (no Node.js needed)
 ```
 
-### 2. Create required directories
+---
+
+## ⚙️ Tech Stack
+
+| Layer | Technology | Purpose |
+|---|---|---|
+| **LLM** | Groq · Llama 3.3 70B | Deep career analysis, roadmap, interview questions |
+| **ML** | scikit-learn · TF-IDF + Logistic Regression | Role prediction, match scoring |
+| **Backend** | FastAPI · Python 3.11+ | REST API, PDF processing |
+| **PDF Parsing** | pdfplumber | Resume text extraction |
+| **Frontend** | Vanilla HTML/CSS/JS | Standalone dashboard UI |
+| **Testing** | pytest · 33 tests | Unit, integration, E2E |
+
+---
+
+## 🚀 Quick Start
+
+### Prerequisites
+- Python 3.11 or 3.12 recommended
+- Free Groq API key → [console.groq.com](https://console.groq.com)
+
+### 1. Clone the repo
 ```bash
-mkdir -p data/faiss_index data/documents data/diskcache
+git clone https://github.com/MohitKB22/AI-BASED-RESUME-ANALYSER.git
+cd AI-BASED-RESUME-ANALYSER
 ```
 
-### 3. Install dependencies
-> ⚠️ Python 3.11 or 3.12 recommended. Python 3.14 may lack wheels for faiss-cpu / torch.
+### 2. Set up backend
 ```bash
-python3.11 -m venv .venv
-source .venv/bin/activate   # Windows: .venv\Scripts\activate
+cd backend
+python3 -m venv venv
+source venv/bin/activate        # Windows: venv\Scripts\activate
 pip install -r requirements.txt
 ```
 
-### 4. Start the API
+### 3. Add your Groq API key
+Create `backend/.env`:
+```
+GROQ_API_KEY=gsk_your_key_here
+```
+Get a free key at [console.groq.com](https://console.groq.com) — no credit card required.
+
+### 4. Train the ML model
 ```bash
-python -m uvicorn api.main:app --reload --port 8000
+python3 train_model.py
 ```
 
-### 5. Start the Streamlit UI (separate terminal)
+### 5. Run tests
 ```bash
-streamlit run app.py
+python3 -m pytest tests/test_all.py -v
+# Expected: 33 passed
 ```
 
-## Project Structure
-```
-papermind/
-├── api/                  # FastAPI app
-│   ├── main.py           # Entry point → uvicorn api.main:app
-│   ├── routes.py         # Endpoint definitions
-│   └── schemas.py        # Pydantic models
-├── agents/               # LangGraph agents
-│   ├── router.py         # Query classifier
-│   ├── qa_agent.py       # QA agent
-│   ├── summarizer.py     # Summarizer agent
-│   └── comparator.py     # Comparator agent
-├── graph/
-│   ├── orchestrator.py   # LangGraph pipeline
-│   └── state.py          # Shared state schema
-├── retriever/
-│   ├── hybrid_retriever.py  # FAISS + BM25 + RRF + Rerank
-│   ├── faiss_store.py
-│   ├── bm25_store.py
-│   └── reranker.py
-├── pipeline/
-│   ├── ingestion.py      # PDF → chunks → index
-│   └── query_rewriter.py
-├── cache/
-│   └── redis_cache.py
-├── prompts/
-│   └── agent_prompts.py
-├── utils/
-│   └── logger.py
-├── config.py             # Settings (reads .env)
-├── app.py                # Streamlit frontend
-├── requirements.txt
-├── .env.example          # Copy to .env and fill in keys
-└── README.md
+### 6. Start the backend
+```bash
+uvicorn main:app --host 0.0.0.0 --port 8000 --reload
 ```
 
-## Notes on stub modules
-Files marked `(stub)` in the source need real implementations:
-- `retriever/faiss_store.py` – connect to your FAISS index
-- `retriever/bm25_store.py` – connect to your BM25 index
-- `retriever/reranker.py` – load a cross-encoder model
-- `pipeline/ingestion.py` – parse PDFs with PyMuPDF / pdfplumber
-- `pipeline/query_rewriter.py` – call OpenAI for HyDE/rewriting
-- `agents/qa_agent.py`, `summarizer.py`, `comparator.py` – implement LLM calls
+### 7. Open the frontend
+```bash
+open ../frontend/index.html
+```
+
+✅ Backend → `http://localhost:8000`  
+✅ API Docs → `http://localhost:8000/docs`  
+✅ Frontend → open `frontend/index.html` in Chrome
+
+---
+
+## 🤖 ML Model Details
+
+The system uses a **two-stage analysis pipeline**:
+
+**Stage 1 — ML Pre-Analysis (instant, no API call)**
+- TF-IDF vectorizer extracts features from resume + job description
+- Cosine similarity computes match score
+- Logistic Regression classifier predicts top 3 suitable roles
+
+**Stage 2 — LLM Deep Analysis (Groq Llama 3.3 70B)**
+- Generates 4-week personalized learning roadmap
+- Suggests 3 real-world portfolio projects
+- Rewrites weak resume bullet points with measurable impact
+- Creates role-specific interview questions with answer hints
+
+| Metric | Value |
+|---|---|
+| Algorithm | TF-IDF + Logistic Regression |
+| Training Samples | 40 |
+| Test Accuracy | 100% |
+| CV Accuracy (3-fold) | 77.3% |
+| Roles Detected | Backend, Frontend, Data Scientist, DevOps, Data Analyst, Full Stack, Mobile, Cybersecurity |
+
+---
+
+## 📡 API Reference
+
+### `POST /api/analyze-career`
+
+**Request** (multipart/form-data):
+
+| Field | Type | Description |
+|---|---|---|
+| `resume` | File | PDF resume (max 5MB) |
+| `job_description` | String | Full job description text |
+
+**Response:**
+```json
+{
+  "match_score": 78,
+  "matched_skills": ["python", "docker", "fastapi"],
+  "missing_skills": ["kubernetes", "redis"],
+  "recommended_roles": ["Backend Developer", "Full Stack Developer"],
+  "roadmap": [
+    {
+      "week": 1,
+      "focus": "Kubernetes Basics",
+      "tasks": ["Learn pods", "Learn services"],
+      "resources": ["kubernetes.io/docs"],
+      "difficulty": "Beginner"
+    }
+  ],
+  "project_suggestions": [...],
+  "resume_improvements": [...],
+  "interview_questions": {
+    "technical": [...],
+    "hr": [...],
+    "system_design": [...]
+  },
+  "ats_tips": [...],
+  "overall_feedback": "Strong profile with excellent Python skills..."
+}
+```
+
+### `GET /api/health`
+```json
+{ "status": "ok", "message": "Career Copilot API is running 🚀" }
+```
+
+---
+
+## 🧪 Tests
+
+```bash
+cd backend
+python3 -m pytest tests/test_all.py -v
+```
+
+| Test Suite | Tests | Coverage |
+|---|---|---|
+| Resume Parser | 5 | PDF extraction, text cleaning |
+| ML Matcher | 13 | Skill gap, scoring, role prediction |
+| API Routes | 10 | Validation, error handling, edge cases |
+| Model Accuracy | 3 | Held-out accuracy, score consistency |
+| End-to-End | 2 | Full pipeline with mocked LLM |
+| **Total** | **33** | **All passing ✅** |
+
+---
+
+## 🌐 Deployment
+
+### Backend → [Render.com](https://render.com) (Free)
+1. Push `backend/` to GitHub
+2. New Web Service on Render
+3. Build command: `pip install -r requirements.txt && python train_model.py`
+4. Start command: `uvicorn main:app --host 0.0.0.0 --port $PORT`
+5. Add env var: `GROQ_API_KEY`
+
+### Frontend → [Netlify Drop](https://app.netlify.com/drop) (Free, 30 seconds)
+1. Update `const API = 'https://your-backend.onrender.com'` in `index.html`
+2. Drag `frontend/index.html` to Netlify Drop
+3. Done — live URL instantly
+
+---
+
+## ❌ Common Issues
+
+| Error | Fix |
+|---|---|
+| `ModuleNotFoundError: groq` | Run `source venv/bin/activate` first |
+| `requirements.txt not found` | You're in wrong folder — `cd backend` first |
+| `model decommissioned` | Run: `sed -i '' 's/llama3-70b-8192/llama-3.3-70b-versatile/g' services/llm_analyzer.py` |
+| `numpy install fails` | Run: `pip install numpy scikit-learn joblib` without version pins |
+| `collected 0 items` | Run pytest from inside `backend/` folder |
+| Frontend shows "API Offline" | Start backend first with `uvicorn main:app --reload` |
+
+---
+
+## 🗺️ Roadmap
+
+- [x] PDF resume parsing
+- [x] ML-based skill matching (TF-IDF + cosine similarity)
+- [x] Role prediction (Logistic Regression)
+- [x] LLM deep analysis (Groq Llama 3.3 70B)
+- [x] 4-week learning roadmap generation
+- [x] Resume bullet point rewrites
+- [x] Interview question generation
+- [x] Standalone HTML dashboard (no Node.js needed)
+- [x] 33 automated tests
+- [ ] User authentication & saved analyses
+- [ ] LinkedIn profile import
+- [ ] Multi-language resume support
+- [ ] PDF report export
+- [ ] Job board integration (Naukri, LinkedIn)
+---
+
+## 📄 License
+
+Distributed under the AGPL-3.0 License. See [`LICENSE`](LICENSE) for more information.
+
+---
+
+<div align="center">
+  <p>If this project helped you, please give it a ⭐ on GitHub!</p>
+</div>
