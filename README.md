@@ -31,34 +31,6 @@
 
 ---
 
-## 🏗️ Architecture
-
-```
-AI-BASED-RESUME-ANALYSER/
-├── backend/
-│   ├── main.py                   # FastAPI application entry point
-│   ├── train_model.py            # ML model training script
-│   ├── requirements.txt          # Python dependencies
-│   ├── .env                      # API keys (not committed)
-│   ├── models/                   # Trained ML model artifacts
-│   │   ├── role_classifier.pkl   # TF-IDF + Logistic Regression
-│   │   ├── label_encoder.pkl     # Role label encoder
-│   │   └── tfidf_vectorizer.pkl  # TF-IDF vectorizer for scoring
-│   ├── routes/
-│   │   └── career.py             # POST /api/analyze-career endpoint
-│   ├── services/
-│   │   ├── resume_parser.py      # PDF text extraction (pdfplumber)
-│   │   ├── ml_matcher.py         # ML skill matching + role prediction
-│   │   └── llm_analyzer.py       # Groq Llama 3.3 70B deep analysis
-│   └── tests/
-│       └── test_all.py           # 33 automated tests
-│
-└── frontend/
-    └── index.html                # Standalone dashboard (no Node.js needed)
-```
-
----
-
 ## ⚙️ Tech Stack
 
 | Layer | Technology | Purpose |
@@ -228,38 +200,6 @@ python3 -m pytest tests/test_all.py -v
 1. Update `const API = 'https://your-backend.onrender.com'` in `index.html`
 2. Drag `frontend/index.html` to Netlify Drop
 3. Done — live URL instantly
-
----
-
-## ❌ Common Issues
-
-| Error | Fix |
-|---|---|
-| `ModuleNotFoundError: groq` | Run `source venv/bin/activate` first |
-| `requirements.txt not found` | You're in wrong folder — `cd backend` first |
-| `model decommissioned` | Run: `sed -i '' 's/llama3-70b-8192/llama-3.3-70b-versatile/g' services/llm_analyzer.py` |
-| `numpy install fails` | Run: `pip install numpy scikit-learn joblib` without version pins |
-| `collected 0 items` | Run pytest from inside `backend/` folder |
-| Frontend shows "API Offline" | Start backend first with `uvicorn main:app --reload` |
-
----
-
-## 🗺️ Roadmap
-
-- [x] PDF resume parsing
-- [x] ML-based skill matching (TF-IDF + cosine similarity)
-- [x] Role prediction (Logistic Regression)
-- [x] LLM deep analysis (Groq Llama 3.3 70B)
-- [x] 4-week learning roadmap generation
-- [x] Resume bullet point rewrites
-- [x] Interview question generation
-- [x] Standalone HTML dashboard (no Node.js needed)
-- [x] 33 automated tests
-- [ ] User authentication & saved analyses
-- [ ] LinkedIn profile import
-- [ ] Multi-language resume support
-- [ ] PDF report export
-- [ ] Job board integration (Naukri, LinkedIn)
 ---
 
 ## 📄 License
