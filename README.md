@@ -1,4 +1,4 @@
-**AI-Based Resume Analyser**
+🤖 AI-Based Resume Analyser
 
 <div align="center">
 
