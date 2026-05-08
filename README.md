@@ -2,8 +2,6 @@
 
 <div align="center">
 
-> Built with **FastAPI + Groq Llama 3.3 70B + scikit-learn ML** — fully free, no paid APIs required.
-
 The project automates resume screening by combining a trained **TF-IDF + Logistic Regression ML model** for instant skill matching with **Groq's Llama 3.3 70B LLM** for deep analysis. It extracts skills from your resume, compares them against a job description, predicts suitable roles, generates a personalized 4-week learning roadmap, suggests real-world projects to build, rewrites weak resume bullet points for ATS compatibility, and produces tailored interview questions — all in under 30 seconds.
 
 </div>
