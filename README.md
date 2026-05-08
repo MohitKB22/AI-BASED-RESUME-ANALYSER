@@ -23,19 +23,6 @@ The project automates resume screening by combining a trained **TF-IDF + Logisti
 
 ---
 
-## ⚙️ Tech Stack
-
-| Layer | Technology | Purpose |
-|---|---|---|
-| **LLM** | Groq · Llama 3.3 70B | Deep career analysis, roadmap, interview questions |
-| **ML** | scikit-learn · TF-IDF + Logistic Regression | Role prediction, match scoring |
-| **Backend** | FastAPI · Python 3.11+ | REST API, PDF processing |
-| **PDF Parsing** | pdfplumber | Resume text extraction |
-| **Frontend** | Vanilla HTML/CSS/JS | Standalone dashboard UI — no Node.js needed |
-| **Testing** | pytest · 33 tests | Unit, integration, E2E |
-
----
-
 ## 🚀 Quick Start
 
 ### Prerequisites
